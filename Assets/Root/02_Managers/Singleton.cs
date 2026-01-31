@@ -1,3 +1,5 @@
+using Cysharp.Threading.Tasks;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
@@ -40,5 +42,10 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+
+    public async virtual UniTask InitializeAsync()
+    {
+        
     }
 }

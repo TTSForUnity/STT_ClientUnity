@@ -20,7 +20,7 @@ public class AppBootStrap : Singleton<AppBootStrap>
     /// <summary>
     /// 매니저 순차적으로 초기화, 의존성 순서 고려
     /// </summary>
-    private async UniTask InitializeAsync()
+    public async override UniTask InitializeAsync()
     {
         await RecordingManager.Instance.InitializeAsync();
     }
