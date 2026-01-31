@@ -11,7 +11,7 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         get
         {
-            lock (_lock) // 메인 쓰레드에서만 객체 생성, 참고 타입만 열쇠로 사용 (예 : Object)
+            lock (_lock) // 메인 쓰레드에서만 객체 생성, 참고 타입만 열쇠로 사용 (예 : Object), 여러 쓰레드에서 중복 생성하지 않도록.
             {
                 if(_instance == null)
                 {
