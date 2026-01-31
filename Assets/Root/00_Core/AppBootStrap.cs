@@ -1,4 +1,5 @@
 using Cysharp.Threading.Tasks;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 /// <summary>
@@ -6,15 +7,23 @@ using UnityEngine.SceneManagement;
 /// </summary>
 public class AppBootStrap : Singleton<AppBootStrap>
 {
+    [SerializeField] private SceneSO sceneSO;
+
     protected override void Awake()
     {
         base.Awake();
         InitializeAsync().Forget();
     }
 
-    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    public void RegisterCallback()
     {
         
+    }
+
+    public void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        var scenecallback = sceneSO.sceneNameList.Find(x => x.sceneName.Equals(scene.name));
+        scenecallback.callback.Invoke();
     }
 
     /// <summary>
@@ -22,6 +31,7 @@ public class AppBootStrap : Singleton<AppBootStrap>
     /// </summary>
     public async override UniTask InitializeAsync()
     {
+        SceneManager.sceneLoaded += OnSceneLoaded;
         await RecordingManager.Instance.InitializeAsync();
     }
 }
