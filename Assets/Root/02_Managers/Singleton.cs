@@ -44,8 +44,5 @@ public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
         }
     }
 
-    public async virtual UniTask InitializeAsync()
-    {
-        
-    }
+    public async virtual UniTask InitializeAsync() {}
 }
