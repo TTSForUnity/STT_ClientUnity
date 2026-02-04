@@ -32,6 +32,8 @@ public class AppBootStrap : Singleton<AppBootStrap>
     public async override UniTask InitializeAsync()
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
+
+        await UIManager.Instance.InitializeAsync();
         await RecordingManager.Instance.InitializeAsync();
     }
 }

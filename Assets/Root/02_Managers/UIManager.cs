@@ -1,11 +1,24 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class UIManager : Singleton<UIManager>
 {
-    public List<UIPanel> allActivePanel = new List<UIPanel>();
+    private List<UIPanel> allActivePanel = new List<UIPanel>();
     public List<UIPanel> curActivePanel = new List<UIPanel>();
 
+    [SerializeField] private UISO UILists;
+
+    public override async UniTask InitializeAsync()
+    {
+        foreach(var panel in UILists.allUiList)
+        {
+            allActivePanel.Add(panel);
+        }
+        await UniTask.Yield();
+    }
     /// <summary>
     /// UI 인스턴스 및 GameObject를 생성합니다.
     /// </summary>
